@@ -135,7 +135,7 @@ var Popup = {
         var html="";
         var i = 0;
         for(var key in attributes){
-            html +="<p><strong>"+key+":</strong> "+attributes[key]+"</p></br>";
+            html +="<p><strong>"+key+":</strong> "+attributes[key]+"</p>";
             i++;
         }
         return html;
