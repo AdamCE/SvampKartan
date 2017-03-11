@@ -1,9 +1,4 @@
-/**
- * Created by ader_metria.se on 2017-03-11.
- */
-
 function createMap(mapDiv) {
-
     var map = new ol.Map({
         layers: [
             new ol.layer.Tile({
@@ -12,14 +7,49 @@ function createMap(mapDiv) {
         ],
         target: mapDiv,
         view: new ol.View({
-            center: ol.proj.fromLonLat([-0.12755, 51.507222]),
-            zoom: 6
+            center: ol.proj.fromLonLat([18.068580800000063,59.32932349999999]),
+            zoom: 10
         })
     });
+    initGps(map);
     map.getControls().clear();
     return map;
 }
 
-function createControl(divName) {
+function initGps(map) {
+    var geolocation = new ol.Geolocation({
+        projection: map.getView().getProjection(),
+        tracking: true,
+        trackingOptions: {
+            enableHighAccuracy: true,
+            maximumAge: 2000
+        }
+    });
 
+    var positionFeature = new ol.Feature();
+    positionFeature.setStyle(new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 8,
+            fill: new ol.style.Fill({
+                color: '#3399CC'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#fff',
+                width: 3
+            })
+        })
+    }));
+    new ol.layer.Vector({
+        map: map,
+        source: new ol.source.Vector({
+            features: [positionFeature]
+        })
+    });
+
+    geolocation.on('change:position', function(event) {
+        console.log(event);
+        var coordinates = geolocation.getPosition();
+        positionFeature.setGeometry(coordinates ?
+          new ol.geom.Point(coordinates) : null);
+    });
 }
