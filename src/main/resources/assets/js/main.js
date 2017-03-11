@@ -13,9 +13,10 @@ function createMap(mapDiv) {
         target: mapDiv,
         view: new ol.View({
             center: ol.proj.fromLonLat([-0.12755, 51.507222]),
-            zoom: 2
+            zoom: 6
         })
     });
+    map.getControls().clear();
 }
 
 function createControl(divName) {
