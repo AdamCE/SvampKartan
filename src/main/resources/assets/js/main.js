@@ -32,7 +32,7 @@ function createMap(mapDiv) {
     geolocation.once('change:position', function() {
         var coords = geolocation.getPosition();
         view.setCenter(coords);
-        view.setResolution(2.388657133911758);
+        view.setResolution(200);
         map.addControl(Weather.createWeather(coords));
     });
 
