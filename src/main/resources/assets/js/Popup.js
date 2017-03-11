@@ -29,13 +29,14 @@ var Popup = {
             duration: 5
         }
         }));
-        theMap.on('singleclick', function(evt) {
+        /*theMap.on('singleclick', function(evt) {
             var coordinate = evt.coordinate;
             content.innerHTML = '<p>You clicked here:</p><p>' + coordinate +
                 '</p>';
             overlay.setPosition(coordinate);
-        });
+        });*/
         theMap.addOverlay(overlay);
+        return this;
     },
     getPopup: function(){
         return container;
