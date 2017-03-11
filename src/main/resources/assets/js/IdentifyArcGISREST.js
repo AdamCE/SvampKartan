@@ -15,7 +15,8 @@ var ArcGISREST = {
 
         $.ajax({
             url: request, dataType: 'json', success: function (response) {
-                popup.setPopupContent(response);
+                popup.setFeatures(response.features);
+                popup.getOverlay().setPosition(geometry);
             }
         });
     }

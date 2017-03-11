@@ -26,4 +26,12 @@ html, body {
     border: 1px solid #cccccc;
     bottom: 12px;
     left: -50px;
+    opacity: 0.8;
+}
+
+#nextFeatureButton{
+    float:right;
+}
+#previousFeatureButton{
+    float:left;
 }
