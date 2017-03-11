@@ -39,5 +39,8 @@ var Popup = {
     },
     getPopup: function(){
         return container;
+    },
+    setPopupContent:function(newContent){
+        content.innerHTML=newContent;
     }
 };
