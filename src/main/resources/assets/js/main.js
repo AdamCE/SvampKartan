@@ -1,6 +1,7 @@
 var serviceUrl = 'https://services.arcgis.com/jO9a2B00pgSIna0g/arcgis/rest/services/Naturskydd/FeatureServer/';
 var layer = "0";
 var token = "&token=g8dH8LIMvidj4i3fTlmsmoC8lAhY6deGCu8HdhijKxVBVbhvYzrtyKlvUlY476SH0071ODAX_DfaKUD0GdYc8xr-AUl2q_UCtiz1RKRK5T9pUEJof-EOIdFbX8bQsFn4lYK-I9sDcySjqf37rWjmx1N1RbK63DXza09CMfEWNnrRAQPQGrSF1jnZRNf7VfO7V927O5juK94pbE3RXAVE4_BoiX6D9YquHJoC6UEncl4";
+var geolocation;
 
 function createMap(mapDiv) {
     var featurelayer = new ol.layer.Vector({
@@ -10,6 +11,12 @@ function createMap(mapDiv) {
         })
     });
     var vector = ArcGISFeatureSource.ArcGISFeatureSource(token,serviceUrl,"0");
+
+    var view = new ol.View({
+        center: [0, 0],
+        zoom: 10
+    });
+
     var map = new ol.Map({
         layers: [featurelayer,
             new ol.layer.Tile({
@@ -18,18 +25,24 @@ function createMap(mapDiv) {
             vector
         ],
         target: mapDiv,
-        view: new ol.View({
-            center: ol.proj.fromLonLat([18.068580800000063,59.32932349999999]),
-            zoom: 10
-        })
+        view: view
     });
     initGps(map);
+
+    geolocation.once('change:position', function() {
+        var coords = geolocation.getPosition();
+        view.setCenter(coords);
+        view.setResolution(2.388657133911758);
+        map.addControl(Weather.createWeather(coords));
+    });
+
     map.getControls().clear();
+
     return map;
 }
 
 function initGps(map) {
-    var geolocation = new ol.Geolocation({
+    geolocation = new ol.Geolocation({
         projection: map.getView().getProjection(),
         tracking: true,
         trackingOptions: {
@@ -58,8 +71,7 @@ function initGps(map) {
         })
     });
 
-    geolocation.on('change:position', function(event) {
-        console.log(event);
+    geolocation.on('change:position', function() {
         var coordinates = geolocation.getPosition();
         positionFeature.setGeometry(coordinates ?
           new ol.geom.Point(coordinates) : null);
