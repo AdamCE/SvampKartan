@@ -17,6 +17,7 @@ function createMap(mapDiv) {
         })
     });
     map.getControls().clear();
+    return map;
 }
 
 function createControl(divName) {

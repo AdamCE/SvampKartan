@@ -5,11 +5,13 @@
     <title>*Kartan</title>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="ol/ol.js"></script>
+    <script type="text/javascript" src="js/Popup.js"></script>
     <link rel="stylesheet" href="ol/ol.css"/>
     <link rel="stylesheet" href="css/main.css"/>
     <script>
         window.onload = function(){
-            createMap(document.getElementById("mapDiv"));
+            var map = createMap(document.getElementById("mapDiv"));
+            Popup.createPopup(map);
         }
     </script>
 </head>

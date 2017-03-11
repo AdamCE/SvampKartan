@@ -10,3 +10,20 @@ html, body {
     width: 100%;
     margin: 0;
 }
+#popup-closer{
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+}
+#popup{
+    position: absolute;
+    background-color: white;
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+}
