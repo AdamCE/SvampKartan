@@ -16,6 +16,12 @@ html, body {
      top: 2px;
      right: 8px;
  }
+#pages{
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    left: 8px;
+}
 #popup{
     position: absolute;
     background-color: white;

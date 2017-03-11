@@ -14,6 +14,7 @@ var currentFeatures;
 var map;
 var featureLayer;
 var page = 0;
+var pages;
 var aThis;
 var Popup = {
     createPopup: function (theMap) {
@@ -38,6 +39,9 @@ var Popup = {
             }
         };
 
+        pages = document.createElement('div');
+        pages.setAttribute('id','pages');
+
         previousFeatureButton = document.createElement('div');
         previousFeatureButton.setAttribute('id','previousFeatureButton');
         previousFeatureButton.innerHTML = "❮";
@@ -57,6 +61,7 @@ var Popup = {
         closer.setAttribute('id','popup-closer');
         container.appendChild(content);
         container.appendChild(closer);
+        container.appendChild(pages);
         container.appendChild(nextFeatureButton);
         container.appendChild(previousFeatureButton);
         closer.innerHTML= "✖";
@@ -121,6 +126,7 @@ var Popup = {
     setFeature:function(feature){
         this.setPopupContent(this.getAttributesAsHTML(feature.attributes));
         this.drawFeature(feature.geometry);
+        pages.innerHTML ="Sida:  "+(aThis.getFeatures().indexOf(feature)+1)+"/"+aThis.getFeatures().length;
     },
     getFeatures: function(){
         return currentFeatures;
