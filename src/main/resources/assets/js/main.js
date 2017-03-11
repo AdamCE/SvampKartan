@@ -1,0 +1,11 @@
+/**
+ * Created by ader_metria.se on 2017-03-11.
+ */
+
+function createMap(mapDiv) {
+
+}
+
+function createControl(divName) {
+
+}
