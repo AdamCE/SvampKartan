@@ -4,6 +4,18 @@
 
 function createMap(mapDiv) {
 
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        target: mapDiv,
+        view: new ol.View({
+            center: ol.proj.fromLonLat([-0.12755, 51.507222]),
+            zoom: 2
+        })
+    });
 }
 
 function createControl(divName) {
