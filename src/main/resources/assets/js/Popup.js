@@ -133,10 +133,10 @@ var Popup = {
     },
     getAttributesAsHTML:function(attributes){
         var html="";
-        var i = 0;
         for(var key in attributes){
-            html +="<p><strong>"+key+":</strong> "+attributes[key]+"</p>";
-            i++;
+            if(key != "FID"){
+                html +="<p><strong>"+key+":</strong> "+attributes[key]+"</p>";
+            }
         }
         return html;
     }

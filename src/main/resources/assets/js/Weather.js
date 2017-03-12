@@ -39,9 +39,9 @@ function addWeatherToDiv(theTimeSeries) {
     i += 6;
     var weather = document.createElement('div');
     weather.setAttribute('class', 'weatherresult');
-    weather.innerHTML = theTimeSeries[i].validTime.substring(11,16)
+    weather.innerHTML = "<p>"+theTimeSeries[i].validTime.substring(11,16)+"</p>"
       + getWeatherIcon(theTimeSeries[i].parameters[18].values[0])
-      + theTimeSeries[i].parameters[1].values[0].toFixed(1) + " ⁰C";
+      + "<p>"+theTimeSeries[i].parameters[1].values[0].toFixed(1) + " ⁰C</p>";
     weathercontent.appendChild(weather);
   }
 }
