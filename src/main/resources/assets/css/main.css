@@ -43,15 +43,23 @@ html, body {
 }
 #weather{
     position: absolute;
+    overflow: hidden;
     background-color: white;
     -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
     filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
     border: 1px solid #cccccc;
     bottom: 0;
     width: 100%;
-    height: 15%;
+    height: 90px;
+}
+#weathercontent{
+    overflow: hidden;
+    width: 200000px;
 }
 .weatherresult{
+    float: left;
+    margin-left: 4%;
+    margin-right: 9%;
     height: 100%;
-    width: 33%;
+    width: 12%;
 }
