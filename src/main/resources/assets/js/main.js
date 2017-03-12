@@ -2,6 +2,8 @@ var serviceUrl = 'https://services.arcgis.com/jO9a2B00pgSIna0g/arcgis/rest/servi
 var layer = "0";
 var token = "&token=g8dH8LIMvidj4i3fTlmsmoC8lAhY6deGCu8HdhijKxVBVbhvYzrtyKlvUlY476SH0071ODAX_DfaKUD0GdYc8xr-AUl2q_UCtiz1RKRK5T9pUEJof-EOIdFbX8bQsFn4lYK-I9sDcySjqf37rWjmx1N1RbK63DXza09CMfEWNnrRAQPQGrSF1jnZRNf7VfO7V927O5juK94pbE3RXAVE4_BoiX6D9YquHJoC6UEncl4";
 var geolocation;
+var vectorSource;
+var stopsFlag;
 
 function createMap(mapDiv) {
     var featurelayer = new ol.layer.Vector({
@@ -101,27 +103,29 @@ function initGps(map) {
                     });
                     points.push(stop);
                 });
-                console.log(points);
 
-                var iconStyle = new ol.style.Style({
-                    image: new ol.style.Icon(({
-                        anchor: [0.5, 46],
-                        anchorXUnits: 'fraction',
-                        anchorYUnits: 'pixels',
-                        opacity: 0.75,
-                        src: 'usefravatar.png'
-                    }))
-                });
-
-                var vectorSource = new ol.source.Vector({
+                vectorSource = new ol.source.Vector({
                     features: points //add an array of features
                 });
 
-                var vectorLayer = new ol.layer.Vector({
-                    map: map,
-                    source: vectorSource,
-                    style: iconStyle
-                });
+                if(!stopsFlag) {
+                    stopsFlag = true;
+                    var iconStyle = new ol.style.Style({
+                        image: new ol.style.Icon(({
+                            anchor: [0.5, 46],
+                            anchorXUnits: 'fraction',
+                            anchorYUnits: 'pixels',
+                            opacity: 0.75,
+                            src: 'img/622.png',
+                            scale: 0.05
+                        }))
+                    });
+                    new ol.layer.Vector({
+                        map: map,
+                        source: vectorSource,
+                        style: iconStyle
+                    });
+                }
             }
         });
     });
