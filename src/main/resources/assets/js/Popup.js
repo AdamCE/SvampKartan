@@ -111,7 +111,7 @@ var Popup = {
                 width: 3
             }),
             fill: new ol.style.Fill({
-                color: 'rgba(0, 0,255 , 0.1)'
+                color: 'rgba(0, 0,255 , 0)'
             })
         }));
         feature.setGeometry(new ol.geom.Polygon(geometry.rings));
