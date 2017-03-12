@@ -33,6 +33,7 @@ html, body {
     bottom: 12px;
     left: -50px;
     opacity: 0.8;
+    width:200px;
 }
 
 #nextFeatureButton{
@@ -69,19 +70,27 @@ html, body {
 }
 .basemapswitcher{
     background-image: url("../switch.svg");
-    width:40px;
+    background-color: white;
+    background-repeat: no-repeat;
+    width:50px;
     height:40px;
     top:20px;
     left:20px;
     position: absolute;
     margin-top: 20px;
+    opacity:0.75;
+    border-radius: 5px;
 }
 .basemapswitcher2{
     background-image: url("../switch2.svg");
-    width:40px;
+    background-color: white;
+    background-repeat: no-repeat;
+    width:50px;
     height:40px;
     top:20px;
     left:20px;
     position: absolute;
     margin-top: 20px;
+    opacity:0.75;
+    border-radius: 5px;
 }

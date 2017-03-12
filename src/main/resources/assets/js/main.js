@@ -1,5 +1,7 @@
 var serviceUrl = 'https://services.arcgis.com/jO9a2B00pgSIna0g/arcgis/rest/services/Naturskydd/FeatureServer/';
+var serviceUrl2 = 'https://services.arcgis.com/jO9a2B00pgSIna0g/arcgis/rest/services/Svamphabitat/FeatureServer/';
 var layer = "0";
+var layer2 ="0,1,2,3";
 var token = "&token=g8dH8LIMvidj4i3fTlmsmoC8lAhY6deGCu8HdhijKxVBVbhvYzrtyKlvUlY476SH0071ODAX_DfaKUD0GdYc8xr-AUl2q_UCtiz1RKRK5T9pUEJof-EOIdFbX8bQsFn4lYK-I9sDcySjqf37rWjmx1N1RbK63DXza09CMfEWNnrRAQPQGrSF1jnZRNf7VfO7V927O5juK94pbE3RXAVE4_BoiX6D9YquHJoC6UEncl4";
 var geolocation;
 var vectorSource;
@@ -13,6 +15,10 @@ function createMap(mapDiv) {
         })
     });
     var vector = ArcGISFeatureSource.ArcGISFeatureSource(token,serviceUrl,"0");
+    var vector2 = ArcGISFeatureSource.ArcGISFeatureSource(token,serviceUrl2,"0");
+    var vector3 = ArcGISFeatureSource.ArcGISFeatureSource(token,serviceUrl2,"1");
+    var vector4 = ArcGISFeatureSource.ArcGISFeatureSource(token,serviceUrl2,"2");
+    var vector5 = ArcGISFeatureSource.ArcGISFeatureSource(token,serviceUrl2,"3");
 
     var view = new ol.View({
         center: [0, 0],
@@ -31,7 +37,11 @@ function createMap(mapDiv) {
     var map = new ol.Map({
         layers: [featurelayer,
             baselayer1,
-            vector
+            vector,
+            vector2,
+            vector3,
+            vector4,
+            vector5
         ],
         target: mapDiv,
         view: view
@@ -42,7 +52,7 @@ function createMap(mapDiv) {
     geolocation.once('change:position', function() {
         var coords = geolocation.getPosition();
         view.setCenter(coords);
-        view.setResolution(200);
+        view.setResolution(10);
         map.addControl(Weather.createWeather(coords));
     });
 

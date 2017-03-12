@@ -105,16 +105,34 @@ var Popup = {
         }
         featureLayer.getSource().clear();
         var feature = new ol.Feature();
-        feature.setStyle(new ol.style.Style({
-            stroke: new ol.style.Stroke({
-                color: 'blue',
-                width: 3
-            }),
-            fill: new ol.style.Fill({
-                color: 'rgba(0, 0,255 , 0)'
-            })
-        }));
+
+        if(geometry.rings == null){
+            feature.setStyle(new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 8,
+                    fill: new ol.style.Fill({
+                        color: 'rgba(0, 0,255 , 0)'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'blue',
+                        width: 3
+                    })
+                })}));
+            feature.setGeometry(new ol.geom.Point([geometry.x,geometry.y]));
+
+        }else{
+            feature.setStyle(new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'blue',
+                    width: 3
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(0, 0,255 , 0)'
+                })
+            }));
         feature.setGeometry(new ol.geom.Polygon(geometry.rings));
+
+        }
         featureLayer.getSource().addFeature(feature);
         map.addLayer(featureLayer);
     },
