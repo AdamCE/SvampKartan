@@ -25,7 +25,29 @@ var ArcGISFeatureSource = {
                                 featureProjection: projection
                             });
                             if (features.length > 0) {
-                                vectorSource.addFeatures(features);
+                                $.ajax({url:serviceUrl+layer+"?f=json"+ token, dataType: 'json',success:function (response){
+                                    var drawingInfo = response.drawingInfo.renderer.uniqueValueInfos;
+                                    var arrayOfStyles = {};
+                                    var field = response.drawingInfo.renderer.field1;
+                                    for(var j=0;j < drawingInfo.length;j++){
+                                        var aNewStyle;
+                                        var label = drawingInfo[j].label;
+                                        var outlinewidth = drawingInfo[j].symbol.outline.width;
+                                        var colorArr = drawingInfo[j].symbol.outline.color;
+                                        var outlinecolor = 'rgba('+colorArr[0]+', '+colorArr[1]+','+colorArr[2]+' , '+colorArr[3]+')';
+                                        aNewStyle = new ol.style.Style({
+                                            stroke: new ol.style.Stroke({
+                                                color: outlinecolor,
+                                                width: outlinewidth
+                                            })});
+                                        arrayOfStyles[label]=aNewStyle;
+                                    }
+                                    for(var x = 0;x < features.length;x++){
+                                        features[x].setStyle(arrayOfStyles[features[x].getProperties()[field]]);
+                                    }
+                                    vectorSource.addFeatures(features);
+                                }});
+
                             }
                         }
                     }
