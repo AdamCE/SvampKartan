@@ -16,17 +16,25 @@ function createMap(mapDiv) {
         center: [0, 0],
         zoom: 10
     });
+    var baselayer1 = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+    var baselayer2 =  new ol.layer.Tile({
+        source: new ol.source.XYZ({
+            attributions: ['Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'],
+            url: 'http://server.arcgisonline.com/ArcGIS/rest/services/' +
+            'World_Imagery/MapServer/tile/{z}/{y}/{x}'
+        })});
 
     var map = new ol.Map({
         layers: [featurelayer,
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
-            }),
+            baselayer1,
             vector
         ],
         target: mapDiv,
         view: view
     });
+
     initGps(map);
 
     geolocation.once('change:position', function() {
@@ -37,7 +45,7 @@ function createMap(mapDiv) {
     });
 
     map.getControls().clear();
-
+    map.addControl(BaseMapSwitcher.createBaseMapSwitchButton(map,baselayer1,baselayer2));
     return map;
 }
 

@@ -67,3 +67,21 @@ html, body {
     height: 100%;
     width: 12%;
 }
+.basemapswitcher{
+    background-image: url("../switch.svg");
+    width:40px;
+    height:40px;
+    top:20px;
+    left:20px;
+    position: absolute;
+    margin-top: 20px;
+}
+.basemapswitcher2{
+    background-image: url("../switch2.svg");
+    width:40px;
+    height:40px;
+    top:20px;
+    left:20px;
+    position: absolute;
+    margin-top: 20px;
+}
